@@ -1,0 +1,83 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              09/30/2019 17:32:40 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          /*
+   2          EE337 lab7: ADC IC tlv1543 interfacinng with pt-51
+   3          L.W.: (1) Complete spi() function from spi.h so that this projecct will work properly 
+   4                (2) Check whether it is working or not
+   5                (3) Edit adc() function to make it genralized.
+   6          */
+   7          
+   8          #include <at89c5131.h>
+   9          #include "lcd.h"                                    //Driver for interfacing lcd 
+  10          #include "tlv1543.h"                                //Driver for interfacing ADC ic tlv1543
+  11          
+  12          
+  13          char adc_ip_data_ascii[6]={0,0,0,0,0,'\0'};         //string array for saving ascii of input sample
+  14          char chnl_ascii[]={0,0,0,'\0'};         //string array for saving ascii of input sample
+  15          char display_msg1[]="ADC channel";              //Display msg on 1st line of lcd
+  16          char display_msg2[]=" mV";                          //Display msg on 2nd line of lcd
+  17          
+  18          
+  19          void main(void)
+  20          {
+  21   1        int j=0;
+  22   1        unsigned int adc_data=0,dac_data=0,channel;
+  23   1        channel=12;
+  24   1        
+  25   1      
+  26   1        spi_init();
+  27   1        adc_init();
+  28   1        lcd_init();
+  29   1      
+  30   1        while(1)
+  31   1        {
+  32   2          if(channel<9){
+  33   3              channel = 13;
+  34   3      
+  35   3          }
+  36   2        int_to_string(channel+1,chnl_ascii);
+  37   2        
+  38   2          lcd_cmd(0x80);                                  //Move cursor to first line
+  39   2          lcd_write_string(display_msg1);                 //Display "ADC channel-00:" on first line of lcd
+  40   2        
+  41   2        lcd_write_string(chnl_ascii);
+  42   2        
+  43   2          
+  44   2          adc_data=adc((channel)*4096);
+  45   2          //adc_data = 1 ;
+  46   2          adc_data= (unsigned int)(3.225806452*adc_data) ;// converting to milli volt (3.3*1000*i/p / 1023)
+  47   2        
+  48   2          int_to_string(adc_data,adc_ip_data_ascii);      //Convering integer to string of ascii
+  49   2          
+  50   2          lcd_cmd(0xC0);                                  //Move cursor to 2nd line
+  51   2          lcd_write_string(adc_ip_data_ascii);            //Print analog sampled input on lcd
+  52   2          lcd_write_string(display_msg2);                 //Display "XXXXX mV" on 2nd line of lcd
+  53   2          msdelay(2000);
+  54   2          channel -= 1;
+C51 COMPILER V9.60.0.0   MAIN                                                              09/30/2019 17:32:40 PAGE 2   
+
+  55   2        }
+  56   1      }
+  57          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    617    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     27      16
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

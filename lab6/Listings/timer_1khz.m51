@@ -1,0 +1,57 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    09/23/2019  14:12:37  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\timer_1khz.obj TO .\Objects\timer_1khz PRINT (.\Listings\timer_1khz.m51) RAMSIZE (
+>> 256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\timer_1khz.obj (TIMER_1KHZ)
+
+
+LINK MAP OF MODULE:  .\Objects\timer_1khz (TIMER_1KHZ)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0040H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\timer_1khz (TIMER_1KHZ)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TIMER_1KHZ
+  C:003EH         SYMBOL        HERE
+  D:00A8H         SYMBOL        IE
+  C:0030H         SYMBOL        MAIN
+  D:00B0H         SYMBOL        P3
+  D:008CH         SYMBOL        TH0
+  D:008AH         SYMBOL        TL0
+  D:0089H         SYMBOL        TMOD
+  B:0088H.4       SYMBOL        TR0
+  C:0000H         LINE#         4
+  C:000BH         LINE#         8
+  C:000DH         LINE#         9
+  C:0030H         LINE#         13
+  C:0033H         LINE#         14
+  C:0036H         LINE#         15
+  C:0039H         LINE#         16
+  C:003CH         LINE#         18
+  C:003EH         LINE#         20
+  -------         ENDMOD        TIMER_1KHZ
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0016H BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=64
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

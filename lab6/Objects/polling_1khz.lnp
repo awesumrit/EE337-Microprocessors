@@ -1,0 +1,3 @@
+".\Objects\polling_1khz.obj" 
+TO ".\Objects\polling_1khz" 
+PRINT(".\Listings\polling_1khz.m51") RAMSIZE(256) 

@@ -1,0 +1,257 @@
+A51 MACRO ASSEMBLER  DUTY                                                                 09/23/2019 15:26:34 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\duty.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE duty.a51 SET(SMALL) DEBUG PRINT(.\Listings\duty.lst) OBJECT(.\Objects\d
+                      uty.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00h
+                       2             
+0000 02013B            3     ljmp main
+0050                   4     org  50h
+0050 D2B2              5     duty20: setb p3.2
+0052 3128              6             acall delay
+0054 3128              7             acall delay
+                       8             
+0056 C2B2              9             clr p3.2
+0058 3128             10             acall delay
+005A 3128             11             acall delay
+005C 3128             12             acall delay
+005E 3128             13             acall delay
+0060 3128             14             acall delay
+0062 3128             15             acall delay
+0064 3128             16             acall delay
+0066 3128             17             acall delay
+                      18     
+0068 80E6             19             sjmp duty20
+006A 22               20             RET
+                      21             
+006B D2B2             22     duty30: setb p3.2
+006D 3128             23             acall delay
+006F 3128             24             acall delay
+0071 3128             25             acall delay
+0073 C2B2             26             clr p3.2
+0075 3128             27             acall delay
+0077 3128             28             acall delay
+0079 3128             29             acall delay
+007B 3128             30             acall delay
+007D 3128             31             acall delay
+007F 3128             32             acall delay
+0081 3128             33             acall delay
+                      34     
+0083 80E6             35             sjmp duty30
+0085 22               36             RET
+                      37             
+0086 D2B2             38     duty40: setb p3.2
+0088 3128             39             acall delay
+008A 3128             40             acall delay
+008C 3128             41             acall delay
+008E 3128             42             acall delay
+0090 C2B2             43             clr p3.2
+                      44             
+0092 3128             45             acall delay
+0094 3128             46             acall delay
+0096 3128             47             acall delay
+0098 3128             48             acall delay
+009A 3128             49             acall delay
+009C 3128             50             acall delay
+                      51     
+009E 80E6             52             sjmp duty40
+00A0 22               53             RET
+                      54     
+00A1 D2B2             55     duty50: setb p3.2
+00A3 3128             56             acall delay
+00A5 3128             57             acall delay
+A51 MACRO ASSEMBLER  DUTY                                                                 09/23/2019 15:26:34 PAGE     2
+
+00A7 3128             58             acall delay
+00A9 3128             59             acall delay
+00AB 3128             60             acall delay
+00AD C2B2             61             clr p3.2
+                      62             
+00AF 3128             63             acall delay
+00B1 3128             64             acall delay
+00B3 3128             65             acall delay
+00B5 3128             66             acall delay
+00B7 3128             67             acall delay
+                      68     
+00B9 80E6             69             sjmp duty50
+00BB 22               70             RET
+                      71     
+00BC D2B2             72     duty60: setb p3.2
+00BE 3128             73             acall delay
+00C0 3128             74             acall delay
+00C2 3128             75             acall delay
+00C4 3128             76             acall delay
+00C6 3128             77             acall delay
+00C8 3128             78             acall delay
+00CA C2B2             79             clr p3.2        
+00CC 3128             80             acall delay
+00CE 3128             81             acall delay
+00D0 3128             82             acall delay
+00D2 3128             83             acall delay
+                      84     
+00D4 80E6             85             sjmp duty60
+00D6 22               86             RET
+                      87             
+00D7 D2B2             88     duty70: setb p3.2
+00D9 3128             89             acall delay
+00DB 3128             90             acall delay
+00DD 3128             91             acall delay
+00DF 3128             92             acall delay
+00E1 3128             93             acall delay
+00E3 3128             94             acall delay
+00E5 3128             95             acall delay
+00E7 C2B2             96             clr p3.2        
+                      97             
+00E9 3128             98             acall delay
+00EB 3128             99             acall delay
+00ED 3128            100             acall delay
+                     101     
+00EF 80E6            102             sjmp duty70
+00F1 22              103             RET
+                     104     
+00F2 D2B2            105     duty80: setb p3.2
+00F4 3128            106             acall delay
+00F6 3128            107             acall delay
+00F8 3128            108             acall delay
+00FA 3128            109             acall delay
+00FC 3128            110             acall delay
+00FE 3128            111             acall delay
+0100 3128            112             acall delay
+0102 3128            113             acall delay
+0104 C2B2            114             clr p3.2        
+0106 3128            115             acall delay
+0108 3128            116             acall delay
+                     117     
+010A 80E6            118             sjmp duty80
+010C 22              119             RET
+                     120             
+010D D2B2            121     duty90: setb p3.2
+010F 3128            122             acall delay
+0111 3128            123             acall delay
+A51 MACRO ASSEMBLER  DUTY                                                                 09/23/2019 15:26:34 PAGE     3
+
+0113 3128            124             acall delay
+0115 3128            125             acall delay
+0117 3128            126             acall delay
+0119 3128            127             acall delay
+011B 3128            128             acall delay
+011D 3128            129             acall delay
+011F 3128            130             acall delay
+0121 C2B2            131             clr p3.2        
+0123 3128            132             acall delay
+                     133     
+0125 80E6            134             sjmp duty90
+0127 22              135             RET
+                     136             
+                     137             
+0128                 138     delay:
+0128 758910          139             mov tmod,#10h ;timer 1,mode1
+                     140     
+012B 758B40          141             back: mov tl1,#-0c0h
+012E 758DFF          142             mov th1,#-01h
+0131 D28E            143             setb tr1
+0133 308FFD          144             again: jnb tf1,again
+0136 C28E            145             clr tr1
+0138 C28F            146             clr tf1
+013A 22              147             ret
+                     148             
+                     149     
+013B                 150     main:
+                     151             
+013B E590            152             mov a, p1
+                     153     
+013D 30E015          154             jnb acc.0, bit0
+0140 20E000          155             jb acc.0, bit1
+                     156             
+0143 30E109          157                     bit1: jnb acc.1, bit01
+0146 20E100          158                                     jb acc.1, bit11
+                     159                                     
+0149 30E22A          160                             bit11: jnb acc.2, dut50
+014C 20E23B          161                                             jb acc.2, dut90 
+                     162                                             
+014F 30E21A          163                             bit01: jnb acc.2, dut30
+0152 20E22B          164                                             jb acc.2, dut70
+                     165                                     
+0155 30E109          166                     bit0: jnb acc.1, bit00
+0158 20E100          167                               jb acc.1, bit10
+                     168                               
+015B 30E213          169                             bit10: jnb acc.2, dut40
+015E 20E224          170                                             jb acc.2, dut80
+                     171                                             
+0161 30E203          172                             bit00: jnb acc.2, dut20
+0164 20E214          173                                             jb acc.2, dut60
+                     174                                             
+0167 120050          175             dut20: lcall duty20
+016A 80CF            176                             sjmp main
+016C 12006B          177             dut30: lcall duty30
+016F 80CA            178                             sjmp main                                       
+0171 120086          179             dut40: lcall duty40
+0174 80C5            180                             sjmp main               
+0176 1200A1          181             dut50: lcall duty50
+0179 80C0            182                             sjmp main
+017B 1200BC          183             dut60: lcall duty60
+017E 80BB            184                             sjmp main
+0180 1200D7          185             dut70: lcall duty70
+0183 80B6            186                             sjmp main
+0185 1200F2          187             dut80: lcall duty80
+0188 80B1            188                             sjmp main
+018A 12010D          189             dut90: lcall duty90
+A51 MACRO ASSEMBLER  DUTY                                                                 09/23/2019 15:26:34 PAGE     4
+
+018D 80AC            190                             sjmp main
+                     191     
+                     192     
+                     193     end
+A51 MACRO ASSEMBLER  DUTY                                                                 09/23/2019 15:26:34 PAGE     5
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+AGAIN. . . . . . .  C ADDR   0133H   A   
+BACK . . . . . . .  C ADDR   012BH   A   
+BIT0 . . . . . . .  C ADDR   0155H   A   
+BIT00. . . . . . .  C ADDR   0161H   A   
+BIT01. . . . . . .  C ADDR   014FH   A   
+BIT1 . . . . . . .  C ADDR   0143H   A   
+BIT10. . . . . . .  C ADDR   015BH   A   
+BIT11. . . . . . .  C ADDR   0149H   A   
+DELAY. . . . . . .  C ADDR   0128H   A   
+DUT20. . . . . . .  C ADDR   0167H   A   
+DUT30. . . . . . .  C ADDR   016CH   A   
+DUT40. . . . . . .  C ADDR   0171H   A   
+DUT50. . . . . . .  C ADDR   0176H   A   
+DUT60. . . . . . .  C ADDR   017BH   A   
+DUT70. . . . . . .  C ADDR   0180H   A   
+DUT80. . . . . . .  C ADDR   0185H   A   
+DUT90. . . . . . .  C ADDR   018AH   A   
+DUTY20 . . . . . .  C ADDR   0050H   A   
+DUTY30 . . . . . .  C ADDR   006BH   A   
+DUTY40 . . . . . .  C ADDR   0086H   A   
+DUTY50 . . . . . .  C ADDR   00A1H   A   
+DUTY60 . . . . . .  C ADDR   00BCH   A   
+DUTY70 . . . . . .  C ADDR   00D7H   A   
+DUTY80 . . . . . .  C ADDR   00F2H   A   
+DUTY90 . . . . . .  C ADDR   010DH   A   
+MAIN . . . . . . .  C ADDR   013BH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+TF1. . . . . . . .  B ADDR   0088H.7 A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

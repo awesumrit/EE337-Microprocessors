@@ -1,0 +1,53 @@
+A51 MACRO ASSEMBLER  TIMER_1KHZ                                                           09/23/2019 14:12:37 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\timer_1khz.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE timer_1khz.a51 SET(SMALL) DEBUG PRINT(.\Listings\timer_1khz.lst) OBJECT
+                      (.\Objects\timer_1khz.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;--upon wake-up go to main, avoid using
+                       2     ;memory allocated to Interrupt Vector Table
+0000                   3     ORG 0000H
+0000 020030            4     LJMP MAIN ;by-pass interrupt vector table
+                       5     ;
+                       6     ;--ISR for timer 0 to generate square wave
+000B                   7     ORG 000BH ;Timer 0 interrupt vector table
+000B B2B2              8             CPL P3.2 ;toggle P2.1 pin
+000D 32                9             RETI ;return from ISR
+                      10     
+                      11     ;--The main program for initialization
+0030                  12     ORG 0030H ;after vector table space
+0030 758934           13     MAIN: MOV TMOD,#34H        ; set mode 1
+0033 758CFE           14               MOV TH0,#0FeH
+0036 758A00           15           MOV TL0,#00H
+0039 75A882           16             MOV IE,#82H ;IE=10000010 (bin) enable
+                      17             ;Timer 0
+003C D28C             18             SETB TR0;Start Timer 0
+                      19     
+003E 80FE             20     here: sjmp here
+                      21     END
+A51 MACRO ASSEMBLER  TIMER_1KHZ                                                           09/23/2019 14:12:37 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   003EH   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

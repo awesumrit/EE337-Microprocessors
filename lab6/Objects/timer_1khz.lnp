@@ -1,0 +1,3 @@
+".\Objects\timer_1khz.obj" 
+TO ".\Objects\timer_1khz" 
+PRINT(".\Listings\timer_1khz.m51") RAMSIZE(256) 

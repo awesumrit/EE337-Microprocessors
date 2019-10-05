@@ -1,0 +1,47 @@
+A51 MACRO ASSEMBLER  POLLING_1KHZ                                                         09/22/2019 22:06:22 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\polling_1khz.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE polling_1khz.a51 SET(SMALL) DEBUG PRINT(.\Listings\polling_1khz.lst) OB
+                      JECT(.\Objects\polling_1khz.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H   
+0000 C2A1              2     CLR P2.1            ; clears the pin1 of port2
+0002 758910            3     MOV TMOD,#10H        ; set mode 1
+0005 758DFB            4     L1: MOV TH1,#0FBH
+0008 758B00            5           MOV TL1,#00H
+000B D28E              6           SETB TR1            ; timer 1 run control bit
+000D 1113              7           ACALL DELAY
+000F B2A1              8           CPL P2.1            ; Complements the pin1 of port2
+0011 80F2              9           SJMP L1   
+                      10     
+0013 308FFD           11     DELAY: JNB TF1,DELAY
+0016 C28F             12                    CLR TF1        ; Clears timer 1 flag
+0018 C28E             13                    CLR TR1        ; Clears timer 1 run control bit
+001A 22               14                     RET
+                      15     END
+A51 MACRO ASSEMBLER  POLLING_1KHZ                                                         09/22/2019 22:06:22 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0013H   A   
+L1 . . . . . . . .  C ADDR   0005H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+TF1. . . . . . . .  B ADDR   0088H.7 A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
