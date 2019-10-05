@@ -1,0 +1,147 @@
+ORG 00H
+LJMP MAIN
+ORG 100H
+ 
+ MULT:
+   USING 0
+   MOV A, @R0 ;X1
+   MOV B, @R1 ;Y2
+   MUL AB ;X1*Y2
+   RET
+   
+ Store8bit:
+   USING 0
+   MOV 19H, R2
+   MOV R1, 19H
+   INC R1
+   MOV @R1, A ; MOV 8 BITS TO RES LOC
+   MOV A, B
+   DEC R1
+   MOV @R1, A ; MOV UPPER 8 BITS TO NEXT RES LOC
+   INC R1
+   INC R1 ;INC POINTER TO NEXT RES LOC
+   MOV 19H, R1
+   MOV R2, 19H
+   RET
+   
+ Store16bit:
+   USING 0
+   MOV 19H, R2
+   MOV R1, 19H
+   MOV R5, A ;LSBS OF A
+   MOV R6, B ;MSBS OF A
+   INC R1
+   MOV A, R3
+   ADD A, R5
+   MOV @R1, A
+   DEC R1
+   MOV A, R4
+   ADDC A, R6
+   MOV @R1, A
+   INC R1
+   INC R1
+   MOV 19H, R1
+   MOV R2, 19H
+   RET
+   
+   
+ CONVOLUTE:
+    USING 0
+    PUSH AR0
+    PUSH AR1
+    PUSH AR2
+    PUSH AR3
+    PUSH AR4
+    PUSH AR5
+    PUSH AR6
+    PUSH ACC
+    MOV R0, 50H
+    MOV R1, 51H
+    LCALL MULT;X1*Y1
+    MOV R2, 52H ; R2 HAS POINTER TO RES LOC
+    LCALL Store8bit
+    MOV R1, 51H
+    INC R1 ; Y2
+    LCALL MULT ;X1*Y2
+    MOV R3, A ;LSBS OF A
+    MOV R4, B ;MSBS OF A
+    INC R0;X2
+    DEC R1;Y1
+    LCALL MULT;X2*Y1
+    LCALL Store16bit
+    MOV R1, 51H
+    DEC R0;X1
+    INC R1;Y2
+    INC R1;Y3
+    LCALL MULT;X1*Y3
+    MOV R3, A
+    MOV A, B
+    MOV R4, A
+    INC R0;X2
+    DEC R1;Y2
+    LCALL MULT;X2*Y2
+    LCALL Store16bit
+    DEC R2
+    DEC R2
+    INC R0;X3
+    MOV R1, 51H
+    LCALL MULT;X3*Y1
+    MOV 53H, R2
+    MOV R1, 53H
+    MOV R5, A;LSBS OF A
+    MOV A, B
+    MOV R6, A;MSBS OF A
+    INC R1
+    MOV A, @R1
+    ADD A, R5
+    MOV @R1, A
+    DEC R1
+    MOV A, @R1
+    ADDC A, R6
+    MOV @R1, A
+    INC R1
+    INC R1
+    MOV 53H, R1
+    MOV R2, 53H
+    MOV R1, 51H
+    DEC R0;X2
+    INC R1;Y2
+    INC R1;Y3
+    LCALL MULT;X2*Y3
+    MOV R3, A ;LSBS OF A
+    MOV A, B
+    MOV R4, A ;MSBS OF A
+    INC R0;X3
+    DEC R1;Y2
+    LCALL MULT;X3*Y2
+    LCALL Store16bit
+    MOV R1, 51H
+    INC R1;Y2
+    INC R1;Y3
+    MOV A, @R0 ;X3
+    MOV B, @R1 ;Y3
+    MUL AB ;X3*Y3
+    LCALL Store8bit
+    POP ACC
+    POP AR6
+    POP AR5
+    POP AR4
+    POP AR3
+    POP AR2
+    POP AR1
+    POP AR0
+    RET
+ 
+ MAIN:
+   MOV 50H, #40H
+   MOV 51H, #45H
+   MOV 52H, #60H
+   MOV 40H, #15
+   MOV 41H, #15
+   MOV 42H, #15
+   MOV 45H, #15
+   MOV 46H, #15
+   MOV 47H, #15
+   LCALL CONVOLUTE
+
+ END

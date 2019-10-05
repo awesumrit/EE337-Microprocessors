@@ -1,0 +1,3 @@
+".\Objects\template_checksum.obj" 
+TO ".\Objects\checksum" 
+PRINT(".\Listings\checksum.m51") RAMSIZE(256) 

@@ -1,0 +1,112 @@
+A51 MACRO ASSEMBLER  TEMPLATE_CHECKSUM                                                    08/13/2019 17:31:53 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\template_checksum.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE template_checksum.asm SET(SMALL) DEBUG PRINT(.\Listings\template_checks
+                      um.lst) OBJECT(.\Objects\template_checksum.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+                       2     ;-- code memory location 00h
+0000 020200            3     LJMP MAIN
+                       4     
+0050                   5     ORG 050H
+                       6     
+0050                   7     INIT:
+                       8             ;-- store the numbers to be added at appropriate locations
+0050 7401              9             MOV a, #1;
+0052 7840             10             MOV r0, #40H
+0054 7B28             11             mov r3, #40
+                      12             
+0056                  13             loop2 : 
+0056 F6               14                        MOV @r0, a
+0057 08               15                        INC r0
+0058 04               16                        INC a
+0059 DBFB             17                        djnz r3, loop2
+                      18             
+005B 22               19             RET
+                      20     ;-- end of subroutine INIT
+                      21     
+005C                  22     ADD_40:
+                      23             ;-- add the numbers stored from memory location 40h to 67h
+                      24             ;-- by using subroutine written in homework
+005C E4               25             CLR a
+005D 7928             26             mov r1, #40
+005F 7840             27             mov r0, #40H
+                      28     
+                      29     
+0061                  30             loop3: 
+0061 26               31                       add a,@r0
+0062 08               32                       inc r0
+0063 D9FC             33                       djnz r1,loop3
+                      34             
+0065 F568             35             mov 68H,a
+                      36             
+0067 22               37             RET
+                      38     ;-- end of subroutine ADD_40
+                      39             
+0068                  40     TWOS_COMP:
+                      41             ;-- perform 2's compliment of the resultant sum
+                      42             ;-- store the checksum byte at memory location 68h
+0068 64FF             43             XRl a, #255
+006A 04               44             inc a
+006B F568             45             mov 68H,a
+006D FD               46             mov r5,a
+006E 22               47             RET
+                      48     ;-- end of subroutine TWOS_COMP
+                      49     
+006F                  50     ADD_41:
+                      51             ;-- add numbers from memory location 40h to 68h
+006F 7929             52             mov r1, #41
+0071 7840             53             mov r0, #40H
+                      54     
+0073 E4               55             CLR A
+0074                  56             loop4: 
+0074 26               57                       add a,@ r0
+A51 MACRO ASSEMBLER  TEMPLATE_CHECKSUM                                                    08/13/2019 17:31:53 PAGE     2
+
+0075 08               58                       inc r0
+0076 D9FC             59                       djnz r1,loop4
+                      60             
+0078 FE               61             mov r6,a
+                      62     
+0079 22               63             RET
+                      64     ;-- end of subroutine ADD_41
+                      65     
+0200                  66     ORG 0200H
+                      67     ;-- code memory location 200h
+0200                  68     MAIN:
+0200 1150             69             ACALL INIT
+0202 115C             70             ACALL ADD_40
+0204 1168             71             ACALL TWOS_COMP
+0206 116F             72             ACALL ADD_41    ;verify the result
+0208 80FE             73             nowHERE:SJMP nowHERE
+                      74     END
+                             
+                             
+                             
+A51 MACRO ASSEMBLER  TEMPLATE_CHECKSUM                                                    08/13/2019 17:31:53 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ADD_40 . . . . . .  C ADDR   005CH   A   
+ADD_41 . . . . . .  C ADDR   006FH   A   
+INIT . . . . . . .  C ADDR   0050H   A   
+LOOP2. . . . . . .  C ADDR   0056H   A   
+LOOP3. . . . . . .  C ADDR   0061H   A   
+LOOP4. . . . . . .  C ADDR   0074H   A   
+MAIN . . . . . . .  C ADDR   0200H   A   
+NOWHERE. . . . . .  C ADDR   0208H   A   
+TWOS_COMP. . . . .  C ADDR   0068H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

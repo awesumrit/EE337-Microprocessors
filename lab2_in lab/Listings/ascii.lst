@@ -1,0 +1,113 @@
+A51 MACRO ASSEMBLER  ASCII                                                                08/19/2019 16:49:13 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\ascii.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ascii.asm SET(SMALL) DEBUG PRINT(.\Listings\ascii.lst) OBJECT(.\Objects
+                      \ascii.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+0000 020155            2     LJMP MAIN
+                       3     
+                       4     
+0100                   5     ORG 100H
+0100                   6             bin2ascii:
+                       7             USING 0
+0100 C0D0              8                     PUSH PSW
+0102 C000              9                     PUSH AR0
+0104 C001             10                     PUSH AR1
+0106 C002             11                     PUSH AR2
+0108 C0E0             12                     PUSH ACC
+                      13                     
+010A 755005           14                     MOV 50H, #5
+010D 755160           15                     MOV 51H, #60H
+0110 755270           16                     MOV 52H, #70H
+                      17     
+0113 AA50             18                     MOV R2, 50H
+0115 A951             19                     MOV R1, 51H
+0117 A852             20                     MOV R0, 52H
+                      21     
+                      22     
+0119 7400             23             MOV A, #0
+011B                  24             LOOP:
+011B 27               25                 ADD A, @R1
+011C 09               26                 INC R1
+011D DAFC             27                 DJNZ R2, LOOP
+011F F4               28             CPL A
+0120 2401             29             ADD A, #1
+0122 FA               30             MOV R2, A
+                      31             
+                      32             ; Lower Nibble
+0123 08               33             INC R0
+0124 C3               34             CLR C
+0125 540F             35                     ANL A, #00FH
+0127 940A             36             SUBB A, #0AH
+0129 4004             37             JC NUM1
+012B 2441             38             ADD A, #41H
+012D 8004             39             SJMP STORE1
+012F                  40             NUM1:
+012F 2430             41                 ADD A, #30H
+0131 240A             42                             ADD A, #0AH
+0133                  43             STORE1:
+0133 F6               44                 MOV @R0, A
+                      45     
+                      46             ;Upper Nibble
+0134 EA               47             MOV A, R2
+0135 54F0             48             ANL A, #0F0H
+0137 03               49             RR A
+0138 03               50             RR A
+0139 03               51             RR A
+013A 03               52             RR A
+013B 18               53             DEC R0
+013C C3               54             CLR C
+013D 940A             55             SUBB A, #0AH
+013F 4004             56             JC NUM2
+0141 2441             57             ADD A, #41H
+A51 MACRO ASSEMBLER  ASCII                                                                08/19/2019 16:49:13 PAGE     2
+
+0143 8004             58             SJMP STORE2
+0145                  59             NUM2:
+0145 2430             60                 ADD A, #30H
+0147 240A             61                             ADD A, #0AH
+0149                  62             STORE2:
+0149 F6               63                 MOV @R0, A
+                      64     
+014A D0E0             65                     POP ACC
+014C D002             66                     POP AR2
+014E D001             67                     POP AR1
+0150 D000             68                     POP AR0
+0152 D0D0             69                     POP PSW
+0154 22               70                     RET
+                      71             
+                      72             
+0155                  73     MAIN:
+0155 120100           74             LCALL bin2ascii
+                      75             END
+A51 MACRO ASSEMBLER  ASCII                                                                08/19/2019 16:49:13 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+AR0. . . . . . . .  D ADDR   0000H   A   
+AR1. . . . . . . .  D ADDR   0001H   A   
+AR2. . . . . . . .  D ADDR   0002H   A   
+BIN2ASCII. . . . .  C ADDR   0100H   A   
+LOOP . . . . . . .  C ADDR   011BH   A   
+MAIN . . . . . . .  C ADDR   0155H   A   
+NUM1 . . . . . . .  C ADDR   012FH   A   
+NUM2 . . . . . . .  C ADDR   0145H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+STORE1 . . . . . .  C ADDR   0133H   A   
+STORE2 . . . . . .  C ADDR   0149H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

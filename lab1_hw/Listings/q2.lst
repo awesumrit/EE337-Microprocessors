@@ -1,0 +1,61 @@
+A51 MACRO ASSEMBLER  Q2                                                                   08/13/2019 16:56:47 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\q2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE q2.asm SET(SMALL) DEBUG PRINT(.\Listings\q2.lst) OBJECT(.\Objects\q2.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     Org 0h
+0000 020100            2     ljmp main;
+0100                   3     Org 100h
+0100                   4     main:
+0100 AA60              5     MOV R2, 60h;most significant of first number
+0102 AB61              6     MOV R3, 61h;least significant of first number
+0104 AC70              7     MOV R4, 70h;most significant of first number
+0106 AD71              8     MOV R5, 71h;least significant of first number
+0108 EB                9     MOV A, R3;
+0109 2D               10     ADD A, R5;
+010A F564             11     MOV 64h, A;
+010C EA               12     MOV A, R2;
+010D 3C               13     ADDC A, R4;
+010E F563             14     MOV 63h,A;
+0110 7E00             15     MOV R6, #0h;
+0112 5001             16     JNC there0;
+0114 0E               17     INC R6;
+0115 EC               18     there0: MOV A, R4;
+0116 EA               19     MOV A, R2;
+0117 33               20     RLC A;
+0118 5001             21     JNC there1;
+011A 0E               22     INC R6;
+011B EC               23     there1: MOV A, R4;
+011C 33               24     RLC A;
+011D 5001             25     JNC there2;
+011F 0E               26     INC R6;
+0120                  27     there2:
+0120 EE               28     MOV A, R6;
+0121 5401             29     ANL A, #00000001b;
+0123 F562             30     MOV 62h, A;
+0125 80FE             31     halt: sjmp halt
+                      32     end
+A51 MACRO ASSEMBLER  Q2                                                                   08/13/2019 16:56:47 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HALT . . . . . . .  C ADDR   0125H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+THERE0 . . . . . .  C ADDR   0115H   A   
+THERE1 . . . . . .  C ADDR   011BH   A   
+THERE2 . . . . . .  C ADDR   0120H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

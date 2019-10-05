@@ -1,0 +1,230 @@
+A51 MACRO ASSEMBLER  READ_PACK                                                            09/03/2019 17:02:45 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\read_pack.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE read_pack.asm SET(SMALL) DEBUG PRINT(.\Listings\read_pack.lst) OBJECT(.
+                      \Objects\read_pack.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00h
+                       2     
+0000 020108            3     ljmp main
+0050                   4     org 50h
+                       5     
+0050                   6     DELAY:
+                       7             USING 0         ;ASSEMBLER DIRECTIVE TO INDICATE REGISTER BANK0
+0050 C0D0              8             PUSH PSW
+0052 C001              9             PUSH AR1        ; STORE R1 (BANK O) ON THE STACK
+0054 C002             10             PUSH AR2
+0056 C003             11             PUSH AR3
+0058 C004             12             PUSH AR4
+                      13     
+005A 79FF             14             MOV R1, #0FFH
+005C 7AC8             15             MOV R2, #200    
+                      16     
+005E                  17             DELAYD:
+005E 7AC8             18                     MOV R2, #200
+0060                  19                     DELAY1:
+0060 79FF             20                             MOV R1, #0FFH
+0062                  21                             DELAY2:
+0062 D9FE             22                                     DJNZ R1, DELAY2
+0064 DAFA             23                             DJNZ R2, DELAY1
+0066 DBF6             24                     DJNZ r3, DELAYD
+                      25                             
+                      26     
+0068 D004             27             POP AR4
+006A D003             28             POP AR3
+006C D002             29             POP AR2         ; POP MUST BE IN REVERSE ORDER OF PUSH
+006E D001             30             POP AR1
+0070 D0D0             31             POP PSW
+0072 22               32             RET
+                      33             
+0073                  34     readNibble:
+0073 D293             35             setb p1.3
+0075 D292             36             setb p1.2
+0077 D291             37             setb p1.1
+0079 D290             38             setb p1.0
+                      39             
+007B D297             40             setb p1.7
+007D D296             41             setb p1.6
+007F D295             42             setb p1.5
+0081 D294             43             setb p1.4
+                      44             
+0083 7B64             45             mov r3, #100 ; for 5 sec delay
+0085 120050           46             lcall delay
+                      47             
+0088 C297             48             clr p1.7
+008A C296             49             clr p1.6
+008C C295             50             clr p1.5
+008E C294             51             clr p1.4
+                      52             
+0090 7B14             53             mov r3, #20 ; for 1 sec delay
+0092 120050           54             lcall delay
+                      55             
+0095 E590             56             mov a, p1
+0097 540F             57             anl a, #0Fh
+A51 MACRO ASSEMBLER  READ_PACK                                                            09/03/2019 17:02:45 PAGE     2
+
+0099 23               58             rl a
+009A 23               59             rl a
+009B 23               60             rl a
+009C 23               61             rl a
+                      62             
+009D F590             63             mov p1, a;
+009F 7B28             64             mov r3, #40 ; for 2 sec delay
+00A1 120050           65             lcall delay
+                      66             
+                      67             
+00A4 22               68             RET
+                      69     
+00A5                  70     packNibbles:
+00A5 E4               71             clr a
+00A6 18               72             dec r0
+00A7 E6               73             mov a, @r0
+00A8 23               74             rl a
+00A9 23               75             rl a
+00AA 23               76             rl a
+00AB 23               77             rl a
+                      78             
+00AC 08               79             inc r0
+00AD 86F0             80             mov b, @r0
+00AF 53F00F           81             anl b, #0Fh
+00B2 25F0             82             add a, b
+                      83             
+00B4 22               84             RET
+                      85     
+00B5                  86     store:
+00B5 E4               87             clr a
+00B6 E590             88             mov a, p1
+00B8 F5F0             89             mov b, a
+00BA 540F             90             anl a, #0Fh
+00BC B40F09           91             cjne a, #0Fh, here
+00BF D297             92             SETB P1.7
+00C1 D296             93             SETB P1.6
+00C3 D295             94             SETB P1.5
+00C5 D294             95             SETB P1.4
+00C7 22               96             RET
+                      97             
+00C8                  98             here:
+00C8                  99                     loop:   
+00C8 120073          100                             lcall readNibble;
+00CB 03              101                             rr a
+00CC 03              102                             rr a
+00CD 03              103                             rr a
+00CE 03              104                             rr a
+00CF F6              105                             mov @r0, a;
+00D0 08              106                             inc r0
+                     107                             
+                     108             
+00D1 1200A5          109             lcall packNibbles;
+00D4 08              110             inc r0 ; r0 -> 50h
+00D5 F6              111             mov @r0, a
+                     112             
+00D6 22              113             RET
+                     114     
+00D7                 115     store2:
+00D7 E4              116             clr a
+00D8 E590            117             mov a, p1
+                     118             
+00DA 120073          119             lcall readNibble;
+00DD 03              120             rr a
+00DE 03              121             rr a
+00DF 03              122             rr a
+00E0 03              123             rr a
+A51 MACRO ASSEMBLER  READ_PACK                                                            09/03/2019 17:02:45 PAGE     3
+
+00E1 F6              124             mov @r0, a;
+                     125             
+                     126             
+00E2 120073          127             lcall readNibble;
+00E5 03              128             rr a
+00E6 03              129             rr a
+00E7 03              130             rr a
+00E8 03              131             rr a
+00E9 08              132             inc r0
+00EA F6              133             mov @r0, a;
+                     134             
+00EB 1200A5          135             lcall packNibbles;
+00EE 08              136             inc r0 ; r0 -> 50h
+00EF F6              137             mov @r0, a
+                     138             
+00F0 22              139             RET
+                     140             
+00F1                 141     disp_checksum:
+00F1 7851            142             mov r0, #51h;
+00F3 1200D7          143             lcall store2; 51h, 52h, 53h
+                     144             
+00F6 7854            145             mov r0, #54h;
+00F8 1200D7          146             lcall store2; 54h, 55h, 56h 
+                     147             
+00FB E553            148             mov a, 53h;
+00FD 8556F0          149             mov b, 56h;
+0100 25F0            150             add a, b ;
+0102 F4              151             cpl a
+0103 2401            152             add a, #1;  ;;Checksum
+0105 F557            153             mov 57h, a      ;;Checksum
+                     154             
+0107 22              155             RET
+                     156             
+                     157             
+0108                 158     main:
+                     159             ;mov r0, #4Eh;
+                     160             ;lcall store; 4Eh, 4Fh, 50h
+                     161             
+0108 1200F1          162             lcall disp_checksum;
+                     163             
+                     164             ;anl p1, #0ffh
+010B 7B28            165             mov r3, #40 ; for 2 sec delay
+010D 120050          166             lcall delay 
+0110 855790          167             mov p1, 57h
+0113 7B28            168             mov r3, #40 ; for 2 sec delay
+0115 120050          169             lcall delay 
+                     170             
+0118 E557            171             mov a, 57h
+011A 23              172             rl a
+011B 23              173             rl a
+011C 23              174             rl a
+011D 23              175             rl a
+011E F590            176             mov p1, a
+0120 7B28            177             mov r3, #40 ;
+0122 120050          178             lcall delay 
+                     179             ; anl p1, #0xf0h
+                     180             ;sjmp main
+0125 22              181             ret
+                     182             
+                     183     END
+A51 MACRO ASSEMBLER  READ_PACK                                                            09/03/2019 17:02:45 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AR1. . . . . . . .  D ADDR   0001H   A   
+AR2. . . . . . . .  D ADDR   0002H   A   
+AR3. . . . . . . .  D ADDR   0003H   A   
+AR4. . . . . . . .  D ADDR   0004H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+DELAY. . . . . . .  C ADDR   0050H   A   
+DELAY1 . . . . . .  C ADDR   0060H   A   
+DELAY2 . . . . . .  C ADDR   0062H   A   
+DELAYD . . . . . .  C ADDR   005EH   A   
+DISP_CHECKSUM. . .  C ADDR   00F1H   A   
+HERE . . . . . . .  C ADDR   00C8H   A   
+LOOP . . . . . . .  C ADDR   00C8H   A   
+MAIN . . . . . . .  C ADDR   0108H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PACKNIBBLES. . . .  C ADDR   00A5H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+READNIBBLE . . . .  C ADDR   0073H   A   
+STORE. . . . . . .  C ADDR   00B5H   A   
+STORE2 . . . . . .  C ADDR   00D7H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

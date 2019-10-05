@@ -1,0 +1,98 @@
+A51 MACRO ASSEMBLER  ASCII                                                                08/19/2019 14:16:16 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\ascii.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ascii.asm SET(SMALL) DEBUG PRINT(.\Listings\ascii.lst) OBJECT(.\Objects
+                      \ascii.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;---------------------------------------------------------------
+                       2     ;PROBLEM STATEMENT: BLINKING LEDS OF PORT0
+                       3     ;PURPOSE: 1. GOOD CODING STYLES 
+                       4     ;         2. USING PUSH, POP INSTRUCTIONS IN SUBROUTINES
+                       5     ;---------------------------------------------------------------
+                       6     
+  0090                 7             LED EQU P1
+                       8     
+0000                   9             ORG 00H
+0000 020076           10             LJMP MAIN
+                      11     
+                      12     
+                      13     ;----------------------------------------------------------------
+0050                  14             ORG 50H
+                      15     
+0050                  16     DELAY:
+                      17             USING 0         ;ASSEMBLER DIRECTIVE TO INDICATE REGISTER BANK0
+0050 C0D0             18             PUSH PSW
+0052 C001             19             PUSH AR1        ; STORE R1 (BANK O) ON THE STACK
+0054 C002             20             PUSH AR2
+0056 C003             21             PUSH AR3
+0058 C004             22             PUSH AR4
+                      23     
+005A 79FF             24             MOV R1, #0FFH
+005C 7AC8             25             MOV R2, #200
+005E 7B0A             26             MOV R3, #10
+0060 AC4F             27             mov R4, 4FH
+                      28                     
+0062                  29             DELAYD:
+0062                  30                     DELAY10:
+0062                  31                             DELAY1:
+0062 00               32                                     NOP
+0063                  33                                     DELAY2:
+0063 D9FE             34                                             DJNZ R1, DELAY2
+0065 DAFB             35                                     DJNZ R2, DELAY1
+0067 DBF9             36                             DJNZ R3, DELAY10
+0069 DCF7             37                     DJNZ R4, DELAYD
+                      38     
+006B D004             39             POP AR4
+006D D003             40             POP AR3
+006F D002             41             POP AR2         ; POP MUST BE IN REVERSE ORDER OF PUSH
+0071 D001             42             POP AR1
+0073 D0D0             43             POP PSW
+0075 22               44             RET
+                      45     
+                      46     ;----------------------------------------------------------------------
+                      47     
+0076                  48     MAIN:
+0076 759000           49                     MOV LED,#00H            ;MAKE P0 OUTPUT PORT
+0079 7455             50                     MOV A,#55H              ;01010101B
+007B 754F02           51                     MOV 4FH, #2;
+007E F590             52             BACK2:MOV LED,A
+0080 120050           53                     LCALL DELAY
+0083 F4               54                     CPL A                   ;10101010B
+0084 80F8             55                     SJMP BACK2              ;INFINITE LOOP
+                      56     
+                      57     ;--------------------------------------------------------------------------
+A51 MACRO ASSEMBLER  ASCII                                                                08/19/2019 14:16:16 PAGE     2
+
+                      58     END
+A51 MACRO ASSEMBLER  ASCII                                                                08/19/2019 14:16:16 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AR1. . . . . . . .  D ADDR   0001H   A   
+AR2. . . . . . . .  D ADDR   0002H   A   
+AR3. . . . . . . .  D ADDR   0003H   A   
+AR4. . . . . . . .  D ADDR   0004H   A   
+BACK2. . . . . . .  C ADDR   007EH   A   
+DELAY. . . . . . .  C ADDR   0050H   A   
+DELAY1 . . . . . .  C ADDR   0062H   A   
+DELAY10. . . . . .  C ADDR   0062H   A   
+DELAY2 . . . . . .  C ADDR   0063H   A   
+DELAYD . . . . . .  C ADDR   0062H   A   
+LED. . . . . . . .  D ADDR   0090H   A   
+MAIN . . . . . . .  C ADDR   0076H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

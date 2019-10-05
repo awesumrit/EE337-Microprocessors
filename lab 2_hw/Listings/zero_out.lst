@@ -1,0 +1,61 @@
+A51 MACRO ASSEMBLER  ZERO_OUT                                                             08/19/2019 15:15:47 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\zero_out.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE zero_out.asm SET(SMALL) DEBUG PRINT(.\Listings\zero_out.lst) OBJECT(.\O
+                      bjects\zero_out.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;---------------------------------------------------------------
+                       2     ;PROBLEM STATEMENT: BLINKING LEDS OF PORT0
+                       3     ;PURPOSE: 1. GOOD CODING STYLES 
+                       4     ;         2. USING PUSH, POP INSTRUCTIONS IN SUBROUTINES
+                       5     ;---------------------------------------------------------------
+                       6     
+  0090                 7             LED EQU P1
+                       8     
+0000                   9             ORG 00H
+0000 020059           10             LJMP MAIN
+                      11     
+                      12     
+                      13     ;----------------------------------------------------------------
+0050                  14             ORG 50H
+                      15     
+0050                  16     zero_out:
+0050 AA50             17             mov r2, 50h
+0052 AB51             18             mov r3, 51h
+                      19     
+0054                  20             loop:
+0054 7B00             21                     mov r3, #0h
+0056 0B               22                     inc r3
+0057 DAFB             23                     djnz r2, loop
+                      24     
+                      25     ;----------------------------------------------------------------------
+                      26     
+0059                  27     MAIN:
+0059 75500C           28             mov 50h, #12;
+005C 120050           29             LCALL zero_out;
+                      30     
+                      31     ;--------------------------------------------------------------------------
+                      32     END
+A51 MACRO ASSEMBLER  ZERO_OUT                                                             08/19/2019 15:15:47 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+LED. . . . . . . .  D ADDR   0090H   A   
+LOOP . . . . . . .  C ADDR   0054H   A   
+MAIN . . . . . . .  C ADDR   0059H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+ZERO_OUT . . . . .  C ADDR   0050H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

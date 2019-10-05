@@ -1,0 +1,47 @@
+A51 MACRO ASSEMBLER  LAB1_PS                                                              08/12/2019 22:17:58 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lab1_ps.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE lab1_ps.a51 SET(SMALL) DEBUG PRINT(.\Listings\lab1_ps.lst) OBJECT(.\Obj
+                      ects\lab1_ps.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     Org 0h
+0000 020100            2     ljmp main;
+0100                   3     Org 100h
+0100                   4     main:
+0100 AA60              5     MOV R2, 60h;most significant of first number
+0102 AB61              6     MOV R3, 61h;least significant of first number
+0104 AC62              7     MOV R4, 62h;most significant of first number
+0106 AD63              8     MOV R5, 63h;least significant of first number
+0108 EB                9     MOV A, R3;
+0109 2D               10     ADD A, R5;
+010A F564             11     MOV 64h, A;
+010C EA               12     MOV A, R2;
+010D 3C               13     ADDC A, R4;
+010E F563             14     MOV 63h,A;
+0110 7E00             15     MOV R6, #0h;
+0112 5001             16     JNC here;
+0114 0E               17     INC R6;
+0115 8E62             18     here: MOV 62h, R6;
+0117 80FE             19     halt: sjmp halt
+                      20     end
+A51 MACRO ASSEMBLER  LAB1_PS                                                              08/12/2019 22:17:58 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HALT . . . . . . .  C ADDR   0117H   A   
+HERE . . . . . . .  C ADDR   0115H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

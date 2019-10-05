@@ -1,0 +1,87 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    08/13/2019  17:31:53  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\template_checksum.obj TO .\Objects\checksum PRINT (.\Listings\checksum.m51) RAMSIZ
+>> E (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\template_checksum.obj (TEMPLATE_CHECKSUM)
+
+
+LINK MAP OF MODULE:  .\Objects\checksum (TEMPLATE_CHECKSUM)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     020AH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\checksum (TEMPLATE_CHECKSUM)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TEMPLATE_CHECKSUM
+  C:005CH         SYMBOL        ADD_40
+  C:006FH         SYMBOL        ADD_41
+  C:0050H         SYMBOL        INIT
+  C:0056H         SYMBOL        LOOP2
+  C:0061H         SYMBOL        LOOP3
+  C:0074H         SYMBOL        LOOP4
+  C:0200H         SYMBOL        MAIN
+  C:0208H         SYMBOL        NOWHERE
+  C:0068H         SYMBOL        TWOS_COMP
+  C:0000H         LINE#         3
+  C:0050H         LINE#         9
+  C:0052H         LINE#         10
+  C:0054H         LINE#         11
+  C:0056H         LINE#         14
+  C:0057H         LINE#         15
+  C:0058H         LINE#         16
+  C:0059H         LINE#         17
+  C:005BH         LINE#         19
+  C:005CH         LINE#         25
+  C:005DH         LINE#         26
+  C:005FH         LINE#         27
+  C:0061H         LINE#         31
+  C:0062H         LINE#         32
+  C:0063H         LINE#         33
+  C:0065H         LINE#         35
+  C:0067H         LINE#         37
+  C:0068H         LINE#         43
+  C:006AH         LINE#         44
+  C:006BH         LINE#         45
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  08/13/2019  17:31:53  PAGE 2
+
+
+  C:006DH         LINE#         46
+  C:006EH         LINE#         47
+  C:006FH         LINE#         52
+  C:0071H         LINE#         53
+  C:0073H         LINE#         55
+  C:0074H         LINE#         57
+  C:0075H         LINE#         58
+  C:0076H         LINE#         59
+  C:0078H         LINE#         61
+  C:0079H         LINE#         63
+  C:0200H         LINE#         69
+  C:0202H         LINE#         70
+  C:0204H         LINE#         71
+  C:0206H         LINE#         72
+  C:0208H         LINE#         73
+  -------         ENDMOD        TEMPLATE_CHECKSUM
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0037H BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=522
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

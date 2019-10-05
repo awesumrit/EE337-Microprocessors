@@ -1,0 +1,60 @@
+A51 MACRO ASSEMBLER  ZERO_OUT                                                             08/19/2019 16:43:05 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\zero_out.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE zero_out.asm SET(SMALL) DEBUG PRINT(.\Listings\zero_out.lst) OBJECT(.\O
+                      bjects\zero_out.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+0000 02011C            2     LJMP MAIN
+                       3     
+                       4     
+0100                   5     ORG 100H
+0100                   6             zeroOut:
+                       7             USING 0
+0100 C0D0              8                     PUSH PSW
+0102 C001              9                     PUSH AR1
+0104 C002             10                     PUSH AR2
+0106 755152           11                     MOV 51H, #52H
+0109 755005           12                     MOV 50H, #5
+010C AA50             13                     MOV R2, 50H
+010E A951             14                     MOV R1, 51H
+0110                  15                     REPEAT:
+0110 7700             16                             MOV @R1, #0
+0112 09               17                             INC R1
+0113 DAFB             18                             DJNZ R2, REPEAT
+0115 D002             19                     POP AR2
+0117 D001             20                     POP AR1
+0119 D0D0             21                     POP PSW
+011B 22               22                     RET
+                      23             
+                      24             
+011C                  25     MAIN:
+011C 120100           26             LCALL zeroOut
+                      27     
+011F 80FE             28     STOP: SJMP STOP
+                      29     END
+A51 MACRO ASSEMBLER  ZERO_OUT                                                             08/19/2019 16:43:05 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AR1. . . . . . . .  D ADDR   0001H   A   
+AR2. . . . . . . .  D ADDR   0002H   A   
+MAIN . . . . . . .  C ADDR   011CH   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+REPEAT . . . . . .  C ADDR   0110H   A   
+STOP . . . . . . .  C ADDR   011FH   A   
+ZEROOUT. . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,68 @@
+A51 MACRO ASSEMBLER  BLOCK_COPY                                                           08/19/2019 16:50:09 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\block_copy.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE block_copy.asm SET(SMALL) DEBUG PRINT(.\Listings\block_copy.lst) OBJECT
+                      (.\Objects\block_copy.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+0000 020125            2     LJMP MAIN
+                       3     
+0100                   4     ORG 100H
+0100                   5             memcpy:
+                       6             USING 0
+0100 C0D0              7                     PUSH PSW
+0102 C000              8                     PUSH AR0
+0104 C001              9                     PUSH AR1
+0106 C002             10                     PUSH AR2
+0108 C0E0             11                     PUSH ACC
+010A C0F0             12                     PUSH B
+010C AA50             13                     MOV R2, 50H
+010E A951             14                     MOV R1, 51H
+0110 A852             15                     MOV R0, 52H
+0112                  16             REPEAT:
+0112 E7               17                 MOV A, @R1
+0113 F6               18                 MOV @R0, A
+0114 09               19                 INC R1
+0115 08               20                 INC R0
+0116 DAFA             21                 DJNZ R2, REPEAT
+0118 D0F0             22                     POP B
+011A D0E0             23                     POP ACC
+011C D002             24                     POP AR2
+011E D001             25                     POP AR1
+0120 D000             26                     POP AR0
+0122 D0D0             27                     POP PSW
+0124 22               28                     RET
+                      29     
+0125                  30     MAIN:
+0125 120100           31             LCALL memcpy
+                      32     
+0128 80FE             33     STOP: SJMP STOP
+                      34     END
+A51 MACRO ASSEMBLER  BLOCK_COPY                                                           08/19/2019 16:50:09 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+AR0. . . . . . . .  D ADDR   0000H   A   
+AR1. . . . . . . .  D ADDR   0001H   A   
+AR2. . . . . . . .  D ADDR   0002H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+MAIN . . . . . . .  C ADDR   0125H   A   
+MEMCPY . . . . . .  C ADDR   0100H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+REPEAT . . . . . .  C ADDR   0112H   A   
+STOP . . . . . . .  C ADDR   0128H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

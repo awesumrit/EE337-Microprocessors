@@ -1,0 +1,74 @@
+ORG 00H
+LJMP MAIN
+
+ORG 100H
+DELAY:
+	USING 0		;ASSEMBLER DIRECTIVE TO INDICATE REGISTER BANK0
+	PUSH PSW
+	PUSH AR1	; STORE R1 (BANK O) ON THE STACK
+	PUSH AR2
+	PUSH AR3
+	PUSH AR4
+
+	MOV R1, #0FFH
+	MOV R2, #200	
+	mov r3, A
+
+	DELAYD:
+		MOV R2, #200
+		DELAY1:
+			MOV R1, #0FFH
+			DELAY2:
+				DJNZ R1, DELAY2
+			DJNZ R2, DELAY1
+		DJNZ r3, DELAYD
+			
+
+	POP AR4
+	POP AR3
+	POP AR2 	; POP MUST BE IN REVERSE ORDER OF PUSH
+	POP AR1
+	POP PSW
+	RET
+
+Blink:
+
+	LCALL DELAY 
+	CPL p1.5 ; D/4 for p1.5
+	
+	LCALL DELAY 
+	CPL p1.5 ; D/4 for p1.5
+	CPL p1.6 ; D/4 + D/4 for p1.6
+	
+	LCALL DELAY ;
+	CPL p1.5 ; D/4 for p1.5
+	
+	LCALL DELAY 
+	CPL p1.5 ;D/4 for p1.5
+	CPL p1.6 ; D/4 + D/4 for p1.6
+	CPL p1.7 ;; D/4 + D/4 + D/4 + D/4 for p1.7
+	
+	sjmp Blink
+	RET
+	
+MAIN:
+	clr a
+
+	SETB P1.0
+	SETB P1.1
+	SETB P1.2
+	SETB P1.3
+	
+	mov a, p1
+	ANL a, #0FH
+	mov r0, a
+	
+	mov a, r0
+	MOV B, #05H
+	mul AB
+	
+	LCALL Blink
+
+	sjmp main
+	
+END

@@ -1,0 +1,50 @@
+A51 MACRO ASSEMBLER  Q1                                                                   08/13/2019 01:03:56 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\q1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE q1.asm SET(SMALL) DEBUG PRINT(.\Listings\q1.lst) OBJECT(.\Objects\q1.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+                       2     
+0000 020200            3     LJMP MAIN
+                       4     
+0200                   5     ORG 0200H
+0200                   6     MAIN:
+                       7     
+0200 7550FF            8             MOV 50H, #0xFF
+0203 7560FF            9             MOV 60H, #0xFF
+                      10             
+0206 E550             11         MOV A,50H; take the value from source to register A
+0208 F5F0             12         MOV B,A; Move the value from A to R5
+020A E560             13             MOV A,60H; take the value from source to register A
+020C 35F0             14             ADDC A,B; Add R5 with A and store to register A
+020E F570             15             MOV 70H,A;
+                      16     
+0210 7E00             17             MOV R6,#0h;
+0212 5001             18             JNC here;
+0214 0E               19             INC R6;
+0215 8E71             20             here: MOV 71H, R6;
+0217 80FE             21     halt: sjmp halt
+                      22     END
+A51 MACRO ASSEMBLER  Q1                                                                   08/13/2019 01:03:56 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+HALT . . . . . . .  C ADDR   0217H   A   
+HERE . . . . . . .  C ADDR   0215H   A   
+MAIN . . . . . . .  C ADDR   0200H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

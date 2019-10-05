@@ -1,0 +1,58 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    08/12/2019  22:17:59  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\lab1_ps.obj TO .\Objects\lab1_ps PRINT (.\Listings\lab1_ps.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\lab1_ps.obj (LAB1_PS)
+
+
+LINK MAP OF MODULE:  .\Objects\lab1_ps (LAB1_PS)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0119H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\lab1_ps (LAB1_PS)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LAB1_PS
+  C:0117H         SYMBOL        HALT
+  C:0115H         SYMBOL        HERE
+  C:0100H         SYMBOL        MAIN
+  C:0000H         LINE#         2
+  C:0100H         LINE#         5
+  C:0102H         LINE#         6
+  C:0104H         LINE#         7
+  C:0106H         LINE#         8
+  C:0108H         LINE#         9
+  C:0109H         LINE#         10
+  C:010AH         LINE#         11
+  C:010CH         LINE#         12
+  C:010DH         LINE#         13
+  C:010EH         LINE#         14
+  C:0110H         LINE#         15
+  C:0112H         LINE#         16
+  C:0114H         LINE#         17
+  C:0115H         LINE#         18
+  C:0117H         LINE#         19
+  -------         ENDMOD        LAB1_PS
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 001CH BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=281
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

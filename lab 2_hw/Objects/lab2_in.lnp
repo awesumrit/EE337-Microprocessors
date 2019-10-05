@@ -1,0 +1,3 @@
+".\Objects\nibble.obj" 
+TO ".\Objects\lab2_in" 
+PRINT(".\Listings\lab2_in.m51") RAMSIZE(256) 
